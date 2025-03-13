@@ -37,9 +37,31 @@ jobs:
         with:
           name: qFlipper-x86_64.AppImage
           path: |
-                ./build/qFlipper-x86_64.AppImage
+            ./build/qFlipper-x86_64.AppImage
           if-no-files-found: error
-          # retention-days: 1
+
+  build_windows:
+    runs-on: [self-hosted, X64, Windows]
+    env:
+      SIGNING_TOOL: ${{ secrets.WIN_SIGNING_TOOL }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0  # must be there, see installer_windows.nsi file for details
+
+      - name: Build application
+        run: .\build_windows.bat
+
+      - name: Publish application
+        uses: actions/upload-artifact@v4
+        with:
+          name: qFlipperSetup-64bit.exe
+          path: |
+            .\build\qFlipperSetup-64bit.exe
+            .\build\qFlipper-64bit.zip
+          if-no-files-found: error
 
   # build_mac:
   #   runs-on: [self-hosted, ARM64, macOS, qFlipper]
