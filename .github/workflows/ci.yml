@@ -91,7 +91,7 @@ jobs:
              .\build\qFlipperSetup-64bit.exe
              .\build\qFlipper-64bit.zip
            if-no-files-found: error
-           retention-days: 1
+  #         retention-days: 1
 
   # upload:
   #   name: Upload apps to storage
@@ -146,3 +146,4 @@ jobs:
   #             -F "branch=${REF}" \
   #             ${FILES[@]} \
   #             "${{ secrets.INDEXER_URL }}"/qFlipper/uploadfiles
+
