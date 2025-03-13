@@ -43,13 +43,13 @@ jobs:
   build_windows:
     runs-on: [self-hosted, X64, Windows]
     env:
-      SIGNING_TOOL: ${{ secrets.WIN_SIGNING_TOOL }}
+        #SIGNING_TOOL: ${{ secrets.WIN_SIGNING_TOOL }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           submodules: true
-          fetch-depth: 0  # must be there, see installer_windows.nsi file for details
+          fetch-depth: 0  # must to be there, see installer_windows.nsi file for details
 
       - name: Build application
         run: .\build_windows.bat
@@ -61,4 +61,3 @@ jobs:
           path: |
             .\build\qFlipperSetup-64bit.exe
             .\build\qFlipper-64bit.zip
-          if-no-files-found: error
